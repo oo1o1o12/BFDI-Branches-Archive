@@ -1,0 +1,69 @@
+name: For lazy people
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Version Check
+        id: version_check
+        run: |
+          latest=$(curl -sL "https://api.bfdibranches.com/version.php" | tr -d '[:space:]')
+          if [ -f unrelated/version.txt ]; then
+            current=$(cat unrelated/version.txt | tr -d '[:space:]')
+          else
+            current="blehh :P"
+          fi
+
+          if [ "$latest" != "$current" ]; then
+            echo "$latest" > unrelated/version.txt
+            
+            echo "new=true" >> $GITHUB_ENV
+            echo "RELEASE_TAG=v$latest" >> $GITHUB_ENV
+          else
+            echo "nope"
+            echo "new=false" >> $GITHUB_ENV
+          fi
+
+      - name: Commit
+        if: env.new == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add unrelated/version.txt
+          git commit -m "update version [skip ci]"
+          git push
+
+      - name: Zippy
+        if: env.new == 'true'
+        run: |
+            cd unrelated
+            chmod +x lazykazy.sh
+            ./lazykazy.sh
+            cd ..
+
+      - name: New Release
+        if: env.new == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          name: "${{ env.RELEASE_TAG }}"
+          body: |
+            A version of BFDI Branches.
+          draft: false
+          prerelease: false
+          files: |
+            branches.zip
