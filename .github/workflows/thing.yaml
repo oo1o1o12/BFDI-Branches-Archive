@@ -12,7 +12,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout
@@ -55,15 +55,10 @@ jobs:
             ./lazykazy.sh
             cd ..
 
-      - name: New Release
+      - name: New Artifact
         if: env.new == 'true'
-        uses: softprops/action-gh-release@v2
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          name: "${{ env.RELEASE_TAG }}"
-          body: |
-            A version of BFDI Branches.
-          draft: false
-          prerelease: false
-          files: |
-            branches.zip
+          name: ${{ env.RELEASE_TAG }}
+          path: branches.zip
+          retention-days: 30
