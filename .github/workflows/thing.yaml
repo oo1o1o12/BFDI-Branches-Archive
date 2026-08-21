@@ -23,7 +23,7 @@ jobs:
         run: |
           latest=$(curl -f -s "https://api.bfdibranches.com/version.php")
           if [ -f unrelated/version.txt ]; then
-            current=$(cat unrelated/version.txt')
+            current=$(cat unrelated/version.txt)
           else
             current="blehh :P"
           fi
