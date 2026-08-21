@@ -62,7 +62,7 @@ jobs:
 
       - name: Make Release
         if: env.new == 'true'
-        uses: actions/upload-release-asset@v1
+        uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -77,4 +77,5 @@ jobs:
         uses: softprops/action-gh-release@v3
         if: github.ref_type == 'tag'
         with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           files: branches.zip
