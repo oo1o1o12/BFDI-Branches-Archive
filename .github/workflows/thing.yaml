@@ -66,16 +66,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.releaseTag }}
-          release_name: Release ${{ env.releaseTag }}
+          tag: ${{ env.releaseTag }}
+          title: ${{ env.releaseTag }}
           body: |
-            BFDI Branches got a new version. This release was automated.
-          draft: false
-          prerelease: false
-        
+            BFDI Branches got a new version.
+          
       - name: Upload File
         uses: softprops/action-gh-release@v3
-        if: github.ref_type == 'tag'
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           files: branches.zip
