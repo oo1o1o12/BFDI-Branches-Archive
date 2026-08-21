@@ -66,5 +66,4 @@ jobs:
         with:
           tag_name: ${{ env.releaseTag }}
           body: A version of BFDI Branches.
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
           files: branches.zip
