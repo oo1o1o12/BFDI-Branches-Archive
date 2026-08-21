@@ -27,9 +27,11 @@ jobs:
           else
             current="blehh :P"
           fi
-          if [[-z "$latest" ]]; then
+          if [ -z "$latest" ]; then
             echo Couldn't get version.
             exit 1
+          else
+            echo yay
           fi
           if [ "$latest" != "$current" ]; then
             echo "$latest" > unrelated/version.txt
