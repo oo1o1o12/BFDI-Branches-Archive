@@ -21,7 +21,7 @@ jobs:
       - name: Version Check
         id: version_check
         run: |
-          latest=$(curl -f -sL "https://api.bfdibranches.com/version.php"')
+          latest=$(curl -f -s "https://api.bfdibranches.com/version.php")
           if [ -f unrelated/version.txt ]; then
             current=$(cat unrelated/version.txt')
           else
