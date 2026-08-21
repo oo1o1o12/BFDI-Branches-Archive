@@ -59,20 +59,11 @@ jobs:
             chmod +x lazykazy.sh
             ./lazykazy.sh
             cd ..
-
+      
       - name: Make Release
-        if: env.new == 'true'
-        uses: elgohr/Github-Release-Action@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag: ${{ env.releaseTag }}
-          title: ${{ env.releaseTag }}
-          body: |
-            BFDI Branches got a new version.
-          
-      - name: Upload File
         uses: softprops/action-gh-release@v3
         with:
+          tag_name: ${{ env.releaseTag }}
+          body: New version for BFDI Branches.
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           files: branches.zip
