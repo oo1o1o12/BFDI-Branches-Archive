@@ -27,13 +27,12 @@ jobs:
           else
             current="blehh :P"
           fi
-          if [ "$latest" == "" ]; then
+          if [[-z "$latest" ]]; then
             echo Couldn't get version.
             exit 1
           fi
           if [ "$latest" != "$current" ]; then
             echo "$latest" > unrelated/version.txt
-            
             echo "new=true" >> $GITHUB_ENV
             echo "releaseTag=v$latest" >> $GITHUB_ENV
           else
