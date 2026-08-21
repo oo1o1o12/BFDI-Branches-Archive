@@ -60,18 +60,21 @@ jobs:
             ./lazykazy.sh
             cd ..
 
-      - name: Release
+      - name: Make Release
         if: env.new == 'true'
-        uses: actions/checkout@v6
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ env.releaseTag }}
           release_name: Release ${{ env.releaseTag }}
           body: |
             BFDI Branches got a new version. This release was automated.
-          files: |
-            branches.zip
-        #uses: actions/upload-artifact@v4
-        #with:
-          #name: branches
-          #path: branches.zip
-          #retention-days: 30
+          draft: false
+          prerelease: false
+        
+      - name: Upload File
+        uses: softprops/action-gh-release@v3
+        if: github.ref_type == 'tag'
+        with:
+          files: branches.zip
