@@ -28,10 +28,10 @@ jobs:
             current="blehh :P"
           fi
           if [ -z "$latest" ]; then
-            echo Couldn't get version.
+            echo "Could not get version."
             exit 1
           else
-            echo yay
+            echo "yay"
           fi
           if [ "$latest" != "$current" ]; then
             echo "$latest" > unrelated/version.txt
