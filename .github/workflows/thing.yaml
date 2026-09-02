@@ -22,8 +22,8 @@ jobs:
         id: version_check
         run: |
           latest=$(curl -f -s "https://api.bfdibranches.com/version.php")
-          if [ -f unrelated/version.txt ]; then
-            current=$(cat unrelated/version.txt)
+          if [ -f version.txt ]; then
+            current=$(cat version.txt)
           else
             current="blehh :P"
           fi
@@ -32,13 +32,12 @@ jobs:
             exit 1
           fi
           if [ "$latest" != "$current" ]; then
-            echo "$latest" > unrelated/version.txt
+            echo "$latest" > version.txt
             echo "new=true" >> $GITHUB_ENV
             echo "releaseTag=v$latest" >> $GITHUB_ENV
           else
             echo "Up to date."
-            exit 0 # why did i put that there below
-            #echo "new=false" >> $GITHUB_ENV
+            exit 0
           fi
 
       - name: Commit
