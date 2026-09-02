@@ -30,15 +30,13 @@ jobs:
           if [ -z "$latest" ]; then
             echo "Could not get version."
             exit 1
-          else
-            echo "yay"
           fi
           if [ "$latest" != "$current" ]; then
             echo "$latest" > unrelated/version.txt
             echo "new=true" >> $GITHUB_ENV
             echo "releaseTag=v$latest" >> $GITHUB_ENV
           else
-            echo "nope"
+            echo "Up to date."
             exit 0 # why did i put that there below
             #echo "new=false" >> $GITHUB_ENV
           fi
@@ -55,10 +53,8 @@ jobs:
       - name: Zippy
         if: env.new == 'true'
         run: |
-            cd unrelated
             chmod +x lazykazy.sh
             ./lazykazy.sh
-            cd ..
       
       - name: Make Release
         if: env.new == 'true'
