@@ -1,9 +1,9 @@
 name: Release
 
 on:
-#  push:
-#    branches:
-#      - main
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 * * * *'
 
@@ -53,8 +53,8 @@ jobs:
       - name: Zippy
         if: env.new == 'true'
         run: |
-            chmod +x lazykazy.sh
-            ./lazykazy.sh
+            curl -o "BFDI Branches.pck" https://bfdibranches.com/new/bfdibranches.pck
+            zip -r -q branches.zip "BFDI Branches.pck"
       
       - name: Make Release
         if: env.new == 'true'
