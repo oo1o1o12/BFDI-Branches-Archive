@@ -1,83 +1,62 @@
 @font-face {
-  font-family: Shag Lounge;
-  src: url(shag.otf);
+    font-family: "Shag Lounge";
+    src: url("shag.otf");
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    background-image: url("stripes.png");
+    background-repeat: repeat;
+    background-size: auto auto;
+    opacity: 0.3;
+    z-index: -1;
 }
 
 body {
-	font-size: 25px;
-	color: white;
-	font-family: "Shag Lounge", sans-serif;
-        max-width: 100%;
-        overflow-x: hidden;
-	background-color: black;
-	text-align: center
+    background-color: black;
+    color: white;
+    font-family: "Shag Lounge", sans-serif;
+    font-size: 25px;
+    max-width: 100%;
+    overflow-x: hidden;
+    text-align: center;
 }
 
 .container {
-	overflow: hidden;
+    overflow: hidden;
 }
 
-.background { 
-	background: url("5bbg2.png") repeat-x;
-	opacity: 30%;
-	height: 1080px; 
-	width: 5760px; 
-	animation: scrolly 14s linear infinite;
-	position: fixed; top: 0;
-	z-index: -1;
+a {
+    text-decoration: none;
 }
 
-a:link {
-  color: cornflowerblue;
-}
-
+a:link,
 a:visited {
-  color: cornflowerblue;
+    color: cornflowerblue;
 }
 
-a:hover {
-  color: #9CBBF4;
-}
-
+a:hover,
 a:active {
-  color: #9CBBF4;
-}
-
-a:link {
-  text-decoration: none;
-}
-
-a:visited {
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-a:active {
-  text-decoration: none;
+    color: #9cbbf4;
 }
 
 .logo {
-    position: relative;
-    max-width: 550px;
     animation: float 3s ease-in-out infinite;
-    margin-top: 0;
     margin-bottom: 0;
-}
-
-.version {
-  animation: float 3s ease-in-out infinite;
+    margin-top: 0;
+    max-width: 550px;
+    position: relative;
 }
 
 @keyframes float {
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(-15px); }
-    100% { transform: translateY(0); }
-}
-
-@keyframes scrolly {
-    0%   { transform: translateX(0); }
-    100%  { transform: translateX(-1920px); }
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
