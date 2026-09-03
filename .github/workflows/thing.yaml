@@ -21,7 +21,9 @@ jobs:
       - name: Version Check
         id: version_check
         run: |
-          latest=$(curl -f -s "https://api.bfdibranches.com/version.php")
+          version=$(curl -f -s "https://api.bfdibranches.com/new/version.php")
+          latest=$(jq -r -n --argjson data "$version" '$data.latest')
+          
           if [ -f version.txt ]; then
             current=$(cat version.txt)
           else
