@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BFDI: Branches - Archive</title>
+    <link rel="stylesheet" href="index.css">
+	 <link rel="icon" type="image/x-icon" href="favicon.ico">
+  </head>
+  <body>
+	  <div class="container">
+	    <div class="background"></div>
+	  </div>
+      <img class="logo" src="logo.png" alt="Logo" style="padding: 20px;">
+      <p>
+			A version archive of BFDI: Branches
+			<br>
+			<a style="font-size: 16px;" href="https://github.com/oo1o1o12/BFDI-Branches-Archive">Github</a>
+		</p>
+    <div id="versionsContainer" style="width: 100%; padding: 20px 8%; box-sizing: border-box;">
+      <div id="versionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; justify-content: center; padding: 20px;"></div>
+    </div>
+    <script type="module">
+      const url = "https://api.github.com/repos/oo1o1o12/BFDI-Branches-Archive/releases";
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+           const error = document.createElement('div');
+  			error.innerHTML = "An error occurred!!" + "<br>" + response.status;
+  			error.style = "color: #FF474C;"
+           document.getElementById('versionsGrid').appendChild(error);
+  			throw new Error(`${response.status}`);
+        }
+        const result = await response.json();
+        for (var i = 0; i < result.length; i++) {
+          //console.log(result[i].tag_name);
+  		  //console.log(i);
+          const cardHTML = `
+  				<div style="text-align: center;">
+  					<h3 style="color: ${result[i].prerelease ? "#FF7F7F" : "lightblue"}; margin: 0 0 5px 0; font-size: 30px;">
+       			            ${result[i].tag_name}
+       			        </h3>
+  								<div>
+       			            	<a href="${result[i].assets[0].browser_download_url}">Download PCK</a>
+  									<br>
+  								</div>
+  								<div style="font-size: 16px; color: gray;">
+  									${result[i].prerelease ? "(prototype)" : "(release)"}
+  								</div>
+  				</div>
+       			`;
+          const version = document.createElement('div');
+          version.innerHTML = cardHTML;
+          document.getElementById('versionsGrid').appendChild(version);
+        }
+      } catch (error) {
+        console.error(error.message);
+      }
+    </script>
+  </body>
+</html>

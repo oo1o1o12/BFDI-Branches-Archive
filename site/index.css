@@ -1,0 +1,83 @@
+@font-face {
+  font-family: Shag Lounge;
+  src: url(shag.otf);
+}
+
+body {
+	font-size: 25px;
+	color: white;
+	font-family: "Shag Lounge", sans-serif;
+        max-width: 100%;
+        overflow-x: hidden;
+	background-color: black;
+	text-align: center
+}
+
+.container {
+	overflow: hidden;
+}
+
+.background { 
+	background: url("5bbg2.png") repeat-x;
+	opacity: 30%;
+	height: 1080px; 
+	width: 5760px; 
+	animation: scrolly 14s linear infinite;
+	position: fixed; top: 0;
+	z-index: -1;
+}
+
+a:link {
+  color: cornflowerblue;
+}
+
+a:visited {
+  color: cornflowerblue;
+}
+
+a:hover {
+  color: #9CBBF4;
+}
+
+a:active {
+  color: #9CBBF4;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.logo {
+    position: relative;
+    max-width: 550px;
+    animation: float 3s ease-in-out infinite;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.version {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(-15px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes scrolly {
+    0%   { transform: translateX(0); }
+    100%  { transform: translateX(-1920px); }
+}
