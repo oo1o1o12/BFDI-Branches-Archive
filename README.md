@@ -1,5 +1,3 @@
-<img width="2844" height="1250" src="logo_archive.png" />
-
 # what is this?
 this is an archive for [BFDI: Branches](https://bfdibranches.com), and that's it
 
