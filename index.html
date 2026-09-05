@@ -15,16 +15,15 @@
 			<br>
 			<a href="https://github.com/oo1o1o12/BFDI-Branches-Archive" style="font-size: 18px;">Github Repository</a>
 		</p>
-    <div id="versionsContainer" style="width: 100%; padding: 20px 8%; box-sizing: border-box;">
 		 <div style="font-size: 15px; color: darkgray;">
-			 Note:<br>
 		 	For versions v0.3.9 and later, you have to replace the version from the launcher to the version you'd wish to use.<br>
 		</div>
 		<div style="font-size: 15px; color: red;">
 		 	Make sure to back up your current version!
 		</div>
+    <div id="versionsContainer" style="width: 100%; padding: 20px 8%; box-sizing: border-box;">
 		 </div>
-      <div id="versionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); column-gap: 10px; row-gap: 50px; justify-content: center; padding: 20px;"></div>
+      <div id="versionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); column-gap: 0px; row-gap: 20px; justify-content: center; padding: 20px; margin-left: 100px; margin-right: 100px"></div>
     </div>
     <img style="max-width: 550px;" src="people.png" style="padding: 20px;">
     <p style="font-size: 20px; color: deepskyblue;">
@@ -50,12 +49,6 @@
 		  if (result[i].assets[0] != null) {
 			  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">PCK</a>`
 			  if (result[i].assets[1] != null) {
-				  //console.log("more than 1 item!!!!!")
-				  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">PCK</a>`
-
-				  //<a href="${result[i].assets[3].browser_download_url}">Download Windows</a><br>
-				  //<a href="${result[i].assets[2].browser_download_url}">Download MacOS</a><br>
-				  //<a href="${result[i].assets[1].browser_download_url}">Download Linux</a>
 				  for (var ii = 0; ii < result[i].assets.length; ii++) {
 					  console.log(ii)
 					  let platformDownload = ``
@@ -67,7 +60,6 @@
 						  platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Linux</a>`
 					  }
 					  downloadButton = downloadButton + platformDownload
-				  
 			  }
 		  }
 	  }
