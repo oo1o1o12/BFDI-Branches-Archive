@@ -48,10 +48,10 @@
   		  //console.log(i);
 		  let downloadButton = `Missing!`
 		  if (result[i].assets[0] != null) {
-			  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">Download PCK</a>`
+			  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">PCK</a>`
 			  if (result[i].assets[1] != null) {
 				  //console.log("more than 1 item!!!!!")
-				  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">Download PCK</a>`
+				  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">PCK</a>`
 
 				  //<a href="${result[i].assets[3].browser_download_url}">Download Windows</a><br>
 				  //<a href="${result[i].assets[2].browser_download_url}">Download MacOS</a><br>
@@ -60,11 +60,11 @@
 					  console.log(ii)
 					  let platformDownload = ``
 					  if (result[i].assets[ii].name == "branches_windows.zip") {
-						  	platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Download Windows</a>`
+						  	platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Windows</a>`
 					  } else if (result[i].assets[ii].name == "branches_macos.zip") {
-						  platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Download MacOS</a>`
+						  platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">MacOS</a>`
 					  } else if (result[i].assets[ii].name == "branches_linux.zip") {
-						  platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Download Linux</a>`
+						  platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Linux</a>`
 					  }
 					  downloadButton = downloadButton + platformDownload
 				  
