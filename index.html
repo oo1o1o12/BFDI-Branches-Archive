@@ -18,6 +18,9 @@
       <div id="versionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; justify-content: center; padding: 20px;"></div>
     </div>
     <img style="max-width: 550px;" src="people2.png" style="padding: 20px;">
+    <p style="font-size: 20px; color: deepskyblue;">
+		If have a pck file of a version that's missing, contact oo1o1o12 on Discord.
+	</p>
     <script type="module">
       const url = "https://api.github.com/repos/oo1o1o12/BFDI-Branches-Archive/releases";
       try {
@@ -33,13 +36,18 @@
         for (var i = 0; i < result.length; i++) {
           //console.log(result[i].tag_name);
   		  //console.log(i);
-          const cardHTML = `
+		  let downloadButton = `Missing!`
+		  if (result[i].assets[0] != null) {
+			  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">Download PCK</a>`
+		  }
+		  		  	
+		  	const cardHTML = `
   				<div style="text-align: center;">
   					<h3 style="color: ${result[i].prerelease ? "#FF7F7F" : "lightblue"}; margin: 0 0 5px 0; font-size: 30px;">
        			            ${result[i].tag_name}
        			        </h3>
   								<div>
-       			            	<a href="${result[i].assets[0].browser_download_url}">Download PCK</a>
+										${downloadButton}
   									<br>
   								</div>
   								<div style="font-size: 16px; color: gray;">
