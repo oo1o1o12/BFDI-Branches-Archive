@@ -13,12 +13,20 @@
       <p>
 			An unofficial version archive of BFDI: Branches
 			<br>
+			<a href="https://github.com/oo1o1o12/BFDI-Branches-Archive" style="font-size: 18px;">Github Repository</a>
 		</p>
-		<a href="https://github.com/oo1o1o12/BFDI-Branches-Archive" style="font-size: 18px;">Github Repository</a>
     <div id="versionsContainer" style="width: 100%; padding: 20px 8%; box-sizing: border-box;">
+		 <div style="font-size: 15px; color: darkgray;">
+			 Note:<br>
+		 	For versions v0.3.9 and later, you have to replace the version from the launcher to the version you'd wish to use.<br>
+		</div>
+		<div style="font-size: 15px; color: red;">
+		 	Make sure to back up your current version!
+		</div>
+		 </div>
       <div id="versionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; justify-content: center; padding: 20px;"></div>
     </div>
-    <img style="max-width: 550px;" src="people2.png" style="padding: 20px;">
+    <img style="max-width: 550px;" src="people.png" style="padding: 20px;">
     <p style="font-size: 20px; color: deepskyblue;">
 		If have a pck file of a version that's missing, contact oo1o1o12 on Discord.
 	</p>
@@ -35,13 +43,34 @@
         }
         const result = await response.json();
         for (var i = 0; i < result.length; i++) {
+			  console.log(result[i].tag_name)
           //console.log(result[i].tag_name);
   		  //console.log(i);
 		  let downloadButton = `Missing!`
 		  if (result[i].assets[0] != null) {
 			  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">Download PCK</a>`
+			  if (result[i].assets[1] != null) {
+				  //console.log("more than 1 item!!!!!")
+				  downloadButton = `<a href="${result[i].assets[0].browser_download_url}">Download PCK</a>`
+
+				  //<a href="${result[i].assets[3].browser_download_url}">Download Windows</a><br>
+				  //<a href="${result[i].assets[2].browser_download_url}">Download MacOS</a><br>
+				  //<a href="${result[i].assets[1].browser_download_url}">Download Linux</a>
+				  for (var ii = 0; ii < result[i].assets.length; ii++) {
+					  console.log(ii)
+					  let platformDownload = ``
+					  if (result[i].assets[ii].name == "branches_windows.zip") {
+						  	platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Download Windows</a>`
+					  } else if (result[i].assets[ii].name == "branches_macos.zip") {
+						  platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Download MacOS</a>`
+					  } else if (result[i].assets[ii].name == "branches_linux.zip") {
+						  platformDownload = `<br><a href="${result[i].assets[ii].browser_download_url}">Download Linux</a>`
+					  }
+					  downloadButton = downloadButton + platformDownload
+				  
+			  }
 		  }
-		  		  	
+	  }
 		  	const cardHTML = `
   				<div style="text-align: center;">
   					<h3 style="color: ${result[i].prerelease ? "#FF7F7F" : "lightblue"}; margin: 0 0 5px 0; font-size: 30px;">
@@ -51,7 +80,7 @@
 										${downloadButton}
   									<br>
   								</div>
-  								<div style="font-size: 16px; color: gray;">
+  								<div style="font-size: 16px; color: gray; padding: 0px;">
   									${result[i].prerelease ? "(beta)" : "(release)"}
   								</div>
   				</div>
@@ -61,7 +90,8 @@
           document.getElementById('versionsGrid').appendChild(version);
         }
       } catch (error) {
-        console.error(error.message);
+			console.error(error.lineNumber);
+			console.error(error.message);
       }
     </script>
   </body>

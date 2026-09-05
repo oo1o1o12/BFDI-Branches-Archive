@@ -3,6 +3,9 @@
     src: url("shag.otf");
 }
 
+html { scrollbar-width: none; }
+body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; }
+
 .background {
     position: fixed;
     inset: 0;
@@ -17,6 +20,7 @@ body {
     background-color: black;
     color: white;
     font-family: "Shag Lounge", sans-serif;
+    -ms-overflow-style: none;
     font-size: 25px;
     max-width: 100%;
     overflow-x: hidden;
