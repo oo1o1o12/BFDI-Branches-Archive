@@ -51,7 +51,7 @@ jobs:
           git push
 
       - name: Zippy
-        if: env.new == 'true' # istg ANY of these could FAIL and KILL the WHOLE thing
+        if: env.new == 'true'
         run: |
             curl --retry 5 -s -o "bfdibranches.pck" https://bfdibranches.com/new/bfdibranches.pck
             curl --retry 5 -s -o "bfdibranches.exe" https://bfdibranches.com/new/bfdibranches.exe
