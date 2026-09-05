@@ -53,18 +53,26 @@ jobs:
       - name: Zippy
         if: env.new == 'true' # istg ANY of these could FAIL and KILL the WHOLE thing
         run: |
-            curl -o "bfdibranches.pck" https://bfdibranches.com/new/bfdibranches.pck
-            curl -o "bfdibranches.exe" https://bfdibranches.com/new/bfdibranches.exe
-            curl -o "bfdibranches.sh" https://bfdibranches.com/new/bfdibranches.sh
-            curl -o "bfdibranches.x84_64" https://bfdibranches.com/new/bfdibranches.x84_64
-            curl -o "bfdibranches.app.zip" https://bfdibranches.com/new/bfdibranches.app.zip
-            unzip bfdibranches.app.zip
-            chmod +x "BFDI- Branches.app/Contents/MacOS/BFDI- Branches"
-            zip -r -q branches.zip "bfdibranches.pck"
-            zip -r -q branches_windows.zip "bfdibranches.exe" "bfdibranches.pck"
-            zip -r -q branches_linux.zip "bfdibranches.sh" "bfdibranches.x84_64" "bfdibranches.pck"
-            cp bfdibranches.pck "BFDI- Branches.app/Contents/Resources/BFDI- Branches.pck"
-            zip -r -q branches_macos.zip "BFDI- Branches.app"
+            curl --retry 5 -s -o "bfdibranches.pck" https://bfdibranches.com/new/bfdibranches.pck
+            curl --retry 5 -s -o "bfdibranches.exe" https://bfdibranches.com/new/bfdibranches.exe
+            curl --retry 5 -s -o "bfdibranches.sh" https://bfdibranches.com/new/bfdibranches.sh
+            curl --retry 5 -s -o "bfdibranches.x84_64" https://bfdibranches.com/new/bfdibranches.x84_64
+            curl --retry 5 -s -o "bfdibranches.app.zip" https://bfdibranches.com/new/bfdibranches.app.zip
+            if [ -f bfdibranches.pck ]; then
+              zip -r -q branches.zip "bfdibranches.pck"
+              if [ -f bfdibranches.exe ]; then
+                zip -r -q branches_windows.zip "bfdibranches.exe" "bfdibranches.pck"
+              fi
+                if [ -f bfdibranches.x84_64 ] && [ -f bfdibranches.sh ]; then
+                zip -r -q branches_linux.zip "bfdibranches.sh" "bfdibranches.x84_64" "bfdibranches.pck"
+              fi
+              if [ -f bfdibranches.app.zip ]; then
+                unzip bfdibranches.app.zip
+                chmod +x "BFDI- Branches.app/Contents/MacOS/BFDI- Branches"
+                cp bfdibranches.pck "BFDI- Branches.app/Contents/Resources/BFDI- Branches.pck"
+                zip -r -q branches_macos.zip "BFDI- Branches.app"
+              fi
+            fi
       
       - name: Make Release
         if: env.new == 'true'
