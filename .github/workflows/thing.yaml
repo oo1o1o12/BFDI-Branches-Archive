@@ -51,10 +51,20 @@ jobs:
           git push
 
       - name: Zippy
-        if: env.new == 'true'
+        if: env.new == 'true' # istg ANY of these could FAIL and KILL the WHOLE thing
         run: |
-            curl -o "BFDI Branches.pck" https://bfdibranches.com/new/bfdibranches.pck
-            zip -r -q branches.zip "BFDI Branches.pck"
+            curl -o "bfdibranches.pck" https://bfdibranches.com/new/bfdibranches.pck
+            curl -o "bfdibranches.exe" https://bfdibranches.com/new/bfdibranches.exe
+            curl -o "bfdibranches.sh" https://bfdibranches.com/new/bfdibranches.sh
+            curl -o "bfdibranches.x84_64" https://bfdibranches.com/new/bfdibranches.x84_64
+            curl -o "bfdibranches.app.zip" https://bfdibranches.com/new/bfdibranches.app.zip
+            unzip bfdibranches.app.zip
+            chmod +x "BFDI- Branches.app/Contents/MacOS/BFDI- Branches"
+            zip -r -q branches.zip "bfdibranches.pck"
+            zip -r -q branches_windows.zip "bfdibranches.exe" "bfdibranches.pck"
+            zip -r -q branches_linux.zip "bfdibranches.sh" "bfdibranches.x84_64" "bfdibranches.pck"
+            cp bfdibranches.pck "BFDI- Branches.app/Contents/Resources/BFDI- Branches.pck"
+            zip -r -q branches_macos.zip "BFDI- Branches.app"
       
       - name: Make Release
         if: env.new == 'true'
@@ -62,4 +72,8 @@ jobs:
         with:
           tag_name: ${{ env.releaseTag }}
           body: A version of BFDI Branches.
-          files: branches.zip
+          files: |
+            branches.zip
+            branches_windows.zip
+            branches_macos.zip
+            branches_linux.zip
