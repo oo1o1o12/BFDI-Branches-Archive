@@ -53,11 +53,11 @@ jobs:
       - name: Zippy
         if: env.new == 'true'
         run: |
-            curl --retry 5 -s -o "bfdibranches.pck" https://bfdibranches.com/new/bfdibranches.pck
-            curl --retry 5 -s -o "bfdibranches.exe" https://bfdibranches.com/new/bfdibranches.exe
-            curl --retry 5 -s -o "bfdibranches.sh" https://bfdibranches.com/new/bfdibranches.sh
-            curl --retry 5 -s -o "bfdibranches.x84_64" https://bfdibranches.com/new/bfdibranches.x84_64
-            curl --retry 5 -s -o "bfdibranches.app.zip" https://bfdibranches.com/new/bfdibranches.app.zip
+            curl --retry 5 -s -o -f "bfdibranches.pck" https://bfdibranches.com/new/bfdibranches.pck
+            curl --retry 5 -s -o -f "bfdibranches.exe" https://bfdibranches.com/new/bfdibranches.exe
+            curl --retry 5 -s -o -f "bfdibranches.sh" https://bfdibranches.com/new/bfdibranches.sh
+            curl --retry 5 -s -o -f "bfdibranches.x84_64" https://bfdibranches.com/new/bfdibranches.x84_64
+            curl --retry 5 -s -o -f "bfdibranches.app.zip" https://bfdibranches.com/new/bfdibranches.app.zip
             if [ -f bfdibranches.pck ]; then
               zip -r -q branches.zip "bfdibranches.pck"
               if [ -f bfdibranches.exe ]; then
