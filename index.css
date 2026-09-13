@@ -3,8 +3,14 @@
     src: url("shag.otf");
 }
 
-html { scrollbar-width: none; }
-body::-webkit-scrollbar, body::-webkit-scrollbar-button { display: none; }
+html {
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar,
+body::-webkit-scrollbar-button {
+    display: none;
+}
 
 .background {
     position: fixed;
@@ -57,9 +63,11 @@ a:active {
     0% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(-15px);
     }
+
     100% {
         transform: translateY(0);
     }

@@ -1,74 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BFDI: Branches - Archive</title>
-    <link rel="stylesheet" href="index.css">
-	 <link rel="icon" type="image/x-icon" href="favicon.ico">
-  </head>
-  <body>
-	  <div class="container">
-	    <div class="background"></div>
-	  </div>
-      <img class="logo" src="logo.png" alt="Logo" style="padding: 20px;">
-      <p>
-			An unofficial version archive of BFDI: Branches
-			<br>
-			<a href="https://github.com/oo1o1o12/BFDI-Branches-Archive" style="font-size: 18px;">Github Repository</a>
-		</p>
-		 <div style="font-size: 15px; color: darkgray;">
-		 	For versions v0.3.9 and later, you have to replace the version from the launcher to the version you'd wish to use.<br>
-		</div>
-		<div style="font-size: 15px; color: red;">
-		 	Make sure to back up your current version!
-		</div>
-    <div id="versionsContainer" style="width: 100%; padding: 20px 8%; box-sizing: border-box;">
-		 </div>
-      <div id="versionsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); column-gap: 0px; row-gap: 40px; justify-content: center; padding: 20px; margin-left: 100px; margin-right: 100px"></div>
-    </div>
-    <img style="max-width: 550px;" src="people.png" style="padding: 20px;">
-    <p style="font-size: 20px; color: deepskyblue;">
+
+<head>
+	<title>BFDI: Branches - Archive</title>
+	<link rel="stylesheet" href="index.css">
+	<link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+	<div class="container">
+		<div class="background"></div>
+	</div>
+	<img class="logo" src="logo.png" alt="Logo" style="padding: 20px;">
+	<p>
+		An unofficial version archive of BFDI: Branches
+		<br>
+		<a href="https://github.com/oo1o1o12/BFDI-Branches-Archive" style="font-size: 18px;">Github Repository</a>
+	</p>
+	<div style="font-size: 15px; color: darkgray;">
+		For versions v0.3.9 and later, you have to replace the version from the launcher to the version you'd wish to
+		use.<br>
+	</div>
+	<div style="font-size: 15px; color: red;">
+		Make sure to back up your current version!
+	</div>
+	<div id="versionsContainer" style="width: 100%; padding: 20px 8%; box-sizing: border-box;">
+	</div>
+	<div id="versionsGrid"
+		style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); column-gap: 0px; row-gap: 40px; justify-content: center; padding: 20px; margin-left: 100px; margin-right: 100px">
+	</div>
+	</div>
+	<img style="max-width: 550px;" src="people.png" style="padding: 20px;">
+	<p style="font-size: 20px; color: deepskyblue;">
 		If you have a PCK file of a version that's missing, contact @oo1o1o12 on Discord.
 	</p>
-    <script type="module">
-      const url = "https://api.github.com/repos/oo1o1o12/BFDI-Branches-Archive/releases";
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-           const error = document.getElementById('versionsContainer');
-  			error.innerHTML = "<br>An error occurred!!<br>" + response.status;
-  			error.style = "color: #FF474C;"
-  			throw new Error(`${response.status}`);
-        }
-        const result = await response.json();
-        for (var i = 0; i < result.length; i++) {
-          //console.log(result[i].tag_name);
-  		  //console.log(i);
-		  let downloadPCKButton = `Missing!`
-		  let platformDownloads = ""
-		  if (result[i].assets[0] != null) {
-			  downloadPCKButton = `<a href="${result[i].assets[0].browser_download_url}">PCK</a>`
-			  if (result[i].assets[1] != null) {
-				  for (var ii = 0; ii < result[i].assets.length; ii++) {
-					  //console.log(ii)
-					  let platformDownload = ``
-					  if (result[i].assets[ii].name == "branches_windows.zip") {
-						  	platformDownload = `<a href="${result[i].assets[ii].browser_download_url}">Windows</a>`
-					  } else if (result[i].assets[ii].name == "branches_macos.zip") {
-						  platformDownload = `<a href="${result[i].assets[ii].browser_download_url}">MacOS</a>`
-					  } else if (result[i].assets[ii].name == "branches_linux.zip") {
-						  platformDownload = `<a href="${result[i].assets[ii].browser_download_url}">Linux</a>`
-					  }
-					  
-					  if (platformDownloads === "") {
-					  		platformDownloads = platformDownloads + platformDownload
-					  } else {
-					  		platformDownloads = platformDownloads + " / " + platformDownload
-					  }
-			  }
-			  //console.log(platformDownloads)
-		  }
-	  }
-		  	const cardHTML = `
+	<script type="module">
+		const url = "https://api.github.com/repos/oo1o1o12/BFDI-Branches-Archive/releases";
+		try {
+			const response = await fetch(url);
+			if (!response.ok) {
+				const error = document.getElementById('versionsContainer');
+				error.innerHTML = "<br>An error occurred!!<br>" + response.status;
+				error.style = "color: #FF474C;"
+				throw new Error(`${response.status}`);
+			}
+			const result = await response.json();
+			for (var i = 0; i < result.length; i++) {
+				//console.log(result[i].tag_name);
+				//console.log(i);
+				let downloadPCKButton = `Missing!`
+				let platformDownloads = ""
+				if (result[i].assets[0] != null) {
+					downloadPCKButton = `<a href="${result[i].assets[0].browser_download_url}">PCK</a>`
+					if (result[i].assets[1] != null) {
+						for (var ii = 0; ii < result[i].assets.length; ii++) {
+							//console.log(ii)
+							let platformDownload = ``
+							if (result[i].assets[ii].name == "branches_windows.zip") {
+								platformDownload = `<a href="${result[i].assets[ii].browser_download_url}">Windows</a>`
+							} else if (result[i].assets[ii].name == "branches_macos.zip") {
+								platformDownload = `<a href="${result[i].assets[ii].browser_download_url}">MacOS</a>`
+							} else if (result[i].assets[ii].name == "branches_linux.zip") {
+								platformDownload = `<a href="${result[i].assets[ii].browser_download_url}">Linux</a>`
+							}
+
+							if (platformDownloads === "") {
+								platformDownloads = platformDownloads + platformDownload
+							} else {
+								platformDownloads = platformDownloads + " / " + platformDownload
+							}
+						}
+						//console.log(platformDownloads)
+					}
+				}
+				const cardHTML = `
   				<div style="text-align: center;">
   					<h3 style="color: ${result[i].prerelease ? "#FF7F7F" : "lightblue"}; margin: 0 0 5px 0; font-size: 30px;">
        			            ${result[i].tag_name}
@@ -81,14 +86,15 @@
   								</div>
  				</div>
        			`;
-          const version = document.createElement('div');
-          version.innerHTML = cardHTML;
-          document.getElementById('versionsGrid').appendChild(version);
-        }
-      } catch (error) {
+				const version = document.createElement('div');
+				version.innerHTML = cardHTML;
+				document.getElementById('versionsGrid').appendChild(version);
+			}
+		} catch (error) {
 			console.error(error.message);
 			console.info(error.lineNumber);
-      }
-    </script>
-  </body>
+		}
+	</script>
+</body>
+
 </html>
