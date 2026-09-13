@@ -6,6 +6,7 @@ on:
 #      - main
   schedule:
     - cron: '0 * * * *'
+  workflow_dispatch:
 
 jobs:
   release:
@@ -63,7 +64,7 @@ jobs:
               if [ -f bfdibranches.exe ]; then
                 zip -r -q branches_windows.zip "bfdibranches.exe" "bfdibranches.pck"
               fi
-                if [ -f bfdibranches.x84_64 ] && [ -f bfdibranches.sh ]; then
+              if [ -f bfdibranches.x84_64 ] && [ -f bfdibranches.sh ]; then
                 zip -r -q branches_linux.zip "bfdibranches.sh" "bfdibranches.x84_64" "bfdibranches.pck"
               fi
               if [ -f bfdibranches.app.zip ]; then
